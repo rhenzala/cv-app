@@ -15,7 +15,15 @@ export default function Editor ({
         deleteForm
     }) {
     return (
-        <div className="editor p-8 text-black w-[40%] flex flex-col gap-3">
+        <div className="editor p-8 text-black bg-black w-[40%] flex flex-col gap-3">
+            <header className="w-full text-white flex justify-between items-center">
+                <div className="logo">
+                    <h1 className="font-bold text-5xl">CV Generator</h1>
+                </div>
+                <div className="download-document mr-4">
+                    <button className="download-button">Download</button>
+                </div>
+            </header>
             <PersonalDetails
             personalInfo={personalInfo}
             updateInfo={updateArray}
