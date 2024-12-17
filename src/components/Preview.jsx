@@ -18,22 +18,27 @@ const formatDate = (date) => {
     }
     return format(dateToFormat, 'MMM yyyy')
 }
-function PersonalSection({
-    firstName, 
-    lastName,
-    cityAddress,
-    phoneNum,
-    email
-}) {
-    const fullName = firstName + ' ' + lastName;
+function DisplayPersonalInfo({ info }) {
     return (
-        <section className="flex flex-col gap-2 items-center">
-            <h1 className="text-2xl font-bold">{fullName}</h1>
+        <div className="flex flex-col gap-2 items-center">
+            <h1 className="text-2xl font-bold">{info.firstName + ' ' + info.lastName}</h1>
             <p className="flex gap-2">
-                <span>{cityAddress}</span>|
-                <span>{phoneNum}</span>|
-                <span>{email}</span>
+                <span>{info.cityAddress}</span>|
+                <span>{info.phoneNum}</span>|
+                <span>{info.email}</span>
             </p>
+        </div>
+    )
+}
+function PersonalSection({ personalInfo }) {
+    return (
+        <section>
+            {personalInfo.map(info =>
+                <DisplayPersonalInfo
+                key={info.id}
+                info={info} 
+                />
+            )}
         </section>
     )
 }
@@ -43,7 +48,7 @@ function DisplayEducation({educ}) {
             <div className="flex justify-between">
             <h2 className="font-semibold">{educ.school}</h2>
             <p className="flex gap-2 italic text-[12px]">
-                <span>{formatDate(educ.fromDate)}</span>-
+                <span>{formatDate(educ.fromDate)}</span>– 
                 <span>{formatDate(educ.toDate)}</span>
             </p>
         </div>
@@ -88,7 +93,7 @@ function DisplayExperience({experience}) {
             <div className="flex justify-between">
                 <h2 className="font-semibold">{experience.company}</h2>
                 <p className="flex gap-2 italic text-[12px]">
-                    <span>{formatDate(experience.fromWorkDate)}</span>-
+                    <span>{formatDate(experience.fromWorkDate)}</span>– 
                     <span>{formatDate(experience.toWorkDate)}</span>
                 </p>
             </div>
@@ -128,11 +133,7 @@ function ExperienceSection({
     )
 }
 export default function Preview({
-    firstName, 
-    lastName,
-    cityAddress,
-    phoneNum,
-    email,
+    personalInfo, 
     education,
     experiences
 }) {
@@ -140,11 +141,7 @@ export default function Preview({
         <div className="preview text-black w-[60%] p-8">
             <section className="bg-white text-sm p-10 mx-auto max-w-[600px] aspect-[1/1.414]">
                 <PersonalSection
-                firstName={firstName}
-                lastName={lastName}
-                cityAddress={cityAddress}
-                phoneNum={phoneNum}
-                email={email}
+                personalInfo={personalInfo}
                 />
                 <EducationSection
                 education={education}
