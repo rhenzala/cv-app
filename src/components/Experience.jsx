@@ -95,7 +95,7 @@ function CreateForm({
                     </div>
                     <div>
                         <ul
-                        className="flex flex-col gap-1"
+                        className="flex flex-col gap-1 p-2"
                         >
                             {experience.descriptions.map((item, index) => (
                                 <li
@@ -105,6 +105,7 @@ function CreateForm({
                                 <span>{item}</span>
                                 <button
                                 onClick={() => deleteDescription('Experience', experience.id, index)}
+                                className="flex-shrink-0"
                                 aria-label="Delete item"
                                 >
                                 <img
