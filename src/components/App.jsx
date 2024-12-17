@@ -39,6 +39,13 @@ function App() {
       descriptions: ['Managed a team of 4 people in delivering project bla bla bla']
     }
   ])
+  const [skills, setSkills] = useState([
+    {
+      id: 1,
+      skillName: 'Technical Skills',
+      skillSet: ['Embedded Programming', 'Game Development']
+    }
+  ])
   const updateArray = (sec, id, field, value) => {
     if (sec === 'Personal') {
       setPersonalInfo(prevInfo => 
@@ -58,31 +65,43 @@ function App() {
           edu.id === id ? {...edu, [field]:value}: edu
         ))
     }
+    if (sec === 'Skills') {
+      setSkills(prevSkills => 
+        prevSkills.map(skill => 
+          skill.id === id ? {...skill, [field]:value}: skill
+        ))
+    }
     
   }
-  const addDescription = (sec, experienceId, description) => {
+  const addDescription = (sec, id, description) => {
     if (sec === 'Experience') {
       setExperiences(prevExperiences => 
         prevExperiences.map(exp => 
-          exp.id === experienceId ? {...exp, descriptions: [...exp.descriptions, description]}: exp
+          exp.id === id ? {...exp, descriptions: [...exp.descriptions, description]}: exp
         ));
     }
     if (sec === 'Education') {
       setEducation(prevEducation => 
         prevEducation.map(edu => 
-          edu.id === experienceId ? {...edu, descriptions: [...edu.descriptions, description]}: edu
+          edu.id === id ? {...edu, descriptions: [...edu.descriptions, description]}: edu
+        ));
+    }
+    if (sec === 'Skills') {
+      setSkills(prevSkills => 
+        prevSkills.map(skill => 
+          skill.id === id ? {...skill, skillSet: [...skill.skillSet, description]}: skill
         ));
     }
     
   }
-  const deleteDescription = (sec, experienceId, descriptionIndex) => {
+  const deleteDescription = (sec, id, index) => {
     if (sec === 'Experience') {
       setExperiences(prevExperiences => 
         prevExperiences.map(exp => 
-          exp.id === experienceId ? 
+          exp.id === id ? 
           {
             ...exp, 
-            descriptions: exp.descriptions.filter((_, i) => i !== descriptionIndex)
+            descriptions: exp.descriptions.filter((_, i) => i !== index)
           } 
           : exp
         ))
@@ -90,12 +109,23 @@ function App() {
     if (sec === 'Education') {
       setEducation(prevEducation => 
         prevEducation.map(edu => 
-          edu.id === experienceId ? 
+          edu.id === id ? 
           {
             ...edu, 
-            descriptions: edu.descriptions.filter((_, i) => i !== descriptionIndex)
+            descriptions: edu.descriptions.filter((_, i) => i !== index)
           } 
           : edu
+        ))
+    }
+    if (sec === 'Skills') {
+      setSkills(prevSkills => 
+        prevSkills.map(skill => 
+          skill.id === id ? 
+          {
+            ...skill, 
+            skillSet: skill.skillSet.filter((_, i) => i !== index)
+          } 
+          : skill
         ))
     }
     
@@ -118,7 +148,6 @@ function App() {
       setExperiences(prevExperiences => [...prevExperiences, newExperience]);
     }
     if (sec === 'Education') {
-      // Math.max() is used to avoid duplication of id when deleting and then adding experience
       const newId = education.length > 0 ?
       Math.max(...education.map(edu => edu.id), 0) + 1
       : 1;
@@ -133,6 +162,18 @@ function App() {
 
       setEducation(prevEducation => [...prevEducation, newEducation]);
     }
+    if (sec === 'Skills') {
+      const newId = skills.length > 0 ?
+      Math.max(...skills.map(skill => skill.id), 0) + 1
+      : 1;
+      const newSkills = {
+        id: newId,
+        skillName: '',
+        skillSet: []
+      };
+
+      setSkills(prevSkills => [...prevSkills, newSkills]);
+    }
     
   }
   const deleteForm = (sec, id) => {
@@ -146,6 +187,11 @@ function App() {
         prevEducation.filter(edu => edu.id !== id)
       )
     }
+    if (sec === 'Skills') {
+      setSkills(prevSkills => 
+        prevSkills.filter(skill => skill.id !== id)
+      )
+    }
   }
   
 
@@ -156,6 +202,7 @@ function App() {
         personalInfo={personalInfo}
         education={education}
         experiences={experiences}
+        skills={skills}
         updateArray={updateArray}
         addDescription={addDescription}
         deleteDescription={deleteDescription}
@@ -166,6 +213,7 @@ function App() {
         personalInfo={personalInfo}
         education={education}
         experiences={experiences}
+        skills={skills}
         />
       </div>
     </>

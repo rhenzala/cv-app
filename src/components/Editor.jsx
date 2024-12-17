@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
-import PersonalDetails from "./PersonalDetails"
-import Education from "./Education"
-import Experience from "./Experience"
-import printIcon from "../assets/print.svg"
-import { useState } from "react"
+import PersonalDetails from "./PersonalDetails";
+import Education from "./Education";
+import Experience from "./Experience";
+import Skill from "./Skill";
+import printIcon from "../assets/print.svg";
+import { useState } from "react";
 
 
 export default function Editor ({
         personalInfo,
         education,
         experiences,
+        skills,
         updateArray,
         addDescription,
         deleteDescription,
@@ -57,6 +59,16 @@ export default function Editor ({
             deleteExperience={deleteForm}
             isActive={activeIndex === 2}
             onShow={() => setActiveIndex(2)}
+            />
+            <Skill 
+            skills={skills}
+            updateSkill={updateArray}
+            addSkillSet={addDescription}
+            deleteSkillSet={deleteDescription}
+            addSkill={addForm}
+            deleteSkill={deleteForm}
+            isActive={activeIndex === 3}
+            onShow={() => setActiveIndex(3)}
             />
         </div>
     )

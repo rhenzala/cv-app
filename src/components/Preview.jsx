@@ -132,23 +132,49 @@ function ExperienceSection({
         </section>
     )
 }
+function DisplaySkills({skill}) {
+    return (
+        <div>
+            <h2 className="font-semibold">{skill.skillName}</h2>
+            <div>
+                {skill.skillSet.map((item, index) => (
+                    <span key={index}>
+                        {item}{index !== skill.skillSet.length - 1 && ', '}
+                    </span>
+                ))}
+            </div>
+        </div>
+    )
+}
+function SkillsSection({ skills }) {
+    return (
+        <section className="flex flex-col mt-4">
+            <h1 className="text-md font-semibold">SKILLS</h1>
+            <hr className="my-2" />
+            <div>
+            {skills.map(skill => (
+                <DisplaySkills
+                key={skill.id}
+                skill={skill} 
+                />
+            ))}
+            </div>
+        </section>
+    )
+}
 export default function Preview({
     personalInfo, 
     education,
-    experiences
+    experiences,
+    skills
 }) {
     return (
         <div className="preview text-black w-[60%] p-8">
             <section className="bg-white text-sm p-10 mx-auto max-w-[600px] aspect-[1/1.414]">
-                <PersonalSection
-                personalInfo={personalInfo}
-                />
-                <EducationSection
-                education={education}
-                />
-                <ExperienceSection
-                experiences={experiences}
-                />
+                <PersonalSection personalInfo={personalInfo} />
+                <EducationSection education={education} />
+                <ExperienceSection experiences={experiences} />
+                <SkillsSection skills={skills} />
             </section>
         </div>
     )
