@@ -76,7 +76,7 @@ function CreateForm({
                         />
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor={`description-${educ.id}`}>Description</label>
+                    <label htmlFor={`description-${educ.id}`}>Achievements</label>
                     <div className="flex gap-2">
                         <input 
                         type="text"
@@ -97,7 +97,7 @@ function CreateForm({
                     </div>
                     <div>
                         <ul
-                        className="flex flex-col gap-1 mt-2"
+                        className="flex flex-col gap-1 p-2"
                         >
                             {educ.descriptions.map((item, index) => (
                                 <li
@@ -107,6 +107,7 @@ function CreateForm({
                                 <span>{item}</span>
                                 <button
                                 onClick={() => deleteDescription('Education', educ.id, index)}
+                                className="flex-shrink-0"
                                 aria-label="Delete item"
                                 >
                                 <img
