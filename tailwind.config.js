@@ -15,7 +15,6 @@ export default {
       'light-gray': '#e5e7eb',
       'red': '#ef4444',
       'rose': '#f43f5e',
-      'blue': '#3b82f6',
     },
     extend: {
     

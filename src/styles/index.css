@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    label {
+        font-weight: 500;
+        font-size: 14px;
+        color: #1f2937;
+        transition: color 0.3s ease;
+    }
+    label:hover,
+    label:focus {
+        color: #f43f5e;
+    }
+    input {
+        border: 1px #1f2937 solid;
+        outline: none;
+        transition: border 0.3s ease;
+    }
+    input:focus,
+    input:hover{
+        border: 1px #f43f5e solid;
+    }
+}
+@layer utilities{
+    .dark-shadow:hover,
+    .dark-shadow:focus {
+        box-shadow: 4px 4px #1f2937;
+        transition: 0.3s ease-in;
+    }
+}

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import deleteIcon from "../assets/delete.svg";
 import plusIcon from "../assets/plus.svg";
 import xIcon from "../assets/x.svg"
 
@@ -27,14 +26,9 @@ function CreateForm({
             onClick={() => onDelete('Education', educ.id)}
             className=" mt-1 mr-1 px-2 h-8"
             >
-            <img
-            src={deleteIcon} 
-            className="w-5 h-5"
-            />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-trash-2 w-5 h-5 hover:stroke-red transition ease-in delay-150"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
             </button>
-            <div
-            className="w-[85%] flex flex-col gap-3"
-            >
+            <div className="w-[85%] flex flex-col gap-3 ">
                 <div className="flex flex-col gap-1">
                     <label htmlFor={`school-${educ.id}`}>School</label>
                     <input 
@@ -87,7 +81,7 @@ function CreateForm({
                         />
                         <button
                         onClick={handleAdd}
-                        className="bg-blue px-1 rounded-full"
+                        className="bg-rose px-1 rounded-full hover:scale-105 transition ease-in delay-150"
                         >
                         <img
                         src={plusIcon}
@@ -102,7 +96,7 @@ function CreateForm({
                             {educ.descriptions.map((item, index) => (
                                 <li
                                 key={index}
-                                className="flex justify-between p-1 rounded-md bg-dark-gray text-white text-sm font-medium"
+                                className="flex justify-between gap-1 p-1 rounded-md bg-dark-gray text-white text-sm font-medium"
                                 >
                                 <span>{item}</span>
                                 <button
@@ -130,7 +124,9 @@ export default function educ({
     addDescription,
     deleteDescription,
     addEducation,
-    deleteEducation
+    deleteEducation,
+    isActive,
+    onShow
 }) { 
     function handleAddEducation(e) {
         e.preventDefault();
@@ -138,10 +134,9 @@ export default function educ({
     }
     return (
         <section className="bg-light-gray p-8 rounded-lg">
-            <div className="flex justify-between mb-4">
-                <h1 className="font-semibold text-xl">Education</h1>
-                <button>Show</button>
-            </div>
+            <h1 className="font-semibold text-xl mb-4">Education</h1>
+            {
+            isActive ?
             <form 
             onSubmit={e => e.preventDefault()}
             className="flex flex-col gap-4">
@@ -157,11 +152,18 @@ export default function educ({
                 ))}
                 <button
                     onClick={handleAddEducation}
-                    className="bg-blue text-white py-2 px-4 rounded-md w-full mt-2 hover:bg-blue/90"
+                    className="dark-shadow bg-rose text-white py-2 px-4 rounded-md w-full mt-2"
                 >
                     Add Education
                 </button>
             </form>
+            : <button 
+            className="dark-shadow bg-rose rounded-md text-white py-1 px-4"
+            onClick={onShow}
+            >
+            Show
+            </button>
+            }
         </section>
          
     )

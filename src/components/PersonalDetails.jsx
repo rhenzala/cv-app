@@ -61,14 +61,15 @@ function CreateForm({
 }
 export default function PersonalDetails({
     personalInfo,
-    updateInfo
+    updateInfo,
+    isActive,
+    onShow
 }) { 
     return (
         <section className="bg-light-gray p-8 rounded-lg">
-            <div className="flex justify-between mb-4">
-                <h1 className="font-semibold text-xl">Personal Details</h1>
-                <button>Show</button>
-            </div>
+            <h1 className="font-semibold text-xl mb-4">Personal Details</h1>
+            {
+            isActive? 
             <form 
             onSubmit={e => e.preventDefault()}
             className="flex flex-col gap-4">
@@ -80,6 +81,13 @@ export default function PersonalDetails({
                     />
                 ))}
             </form>
+            : <button 
+            className="dark-shadow bg-rose rounded-md text-white py-1 px-4"
+            onClick={onShow}
+            >
+            Show
+            </button>
+            }
         </section>
          
     )
