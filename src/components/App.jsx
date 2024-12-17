@@ -5,11 +5,16 @@ import Preview from './Preview'
 
 
 function App() {
-  const [firstName, setFirstName] = useState('John');
-  const [lastName, setLastName] = useState('Doe');
-  const [cityAddress, setCityAddress] = useState('London, UK');
-  const [phoneNum, setPhoneNum] = useState('123456789');
-  const [email, setEmail] = useState('johndoe@email.com');
+  const [personalInfo, setPersonalInfo] = useState([
+    {
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
+      cityAddress: 'London, UK',
+      phoneNum: '123456789',
+      email: 'johndoe.fake@email.com'
+    }
+  ])
 
   const [education, setEducation] = useState([
     {
@@ -18,7 +23,10 @@ function App() {
       fieldStudy: 'BS Computer Science',
       fromDate: '2014-08',
       toDate: '2018-09',
-      descriptions: []
+      descriptions: [
+        'Best in innovative technological solution awardee',
+        'Relevant coursework: Software Development 101, Data Structures & Algorithm'
+      ]
     }
   ])
   const [experiences, setExperiences] = useState([
@@ -28,10 +36,16 @@ function App() {
       role: 'Software Engineer',
       fromWorkDate: '2018-03',
       toWorkDate: '2022-09',
-      descriptions: []
+      descriptions: ['Managed a team of 4 people in delivering project bla bla bla']
     }
   ])
   const updateArray = (sec, id, field, value) => {
+    if (sec === 'Personal') {
+      setPersonalInfo(prevInfo => 
+        prevInfo.map(info => 
+          info.id === id ? {...info, [field]:value}: info
+        ))
+    }
     if (sec === 'Experience') {
       setExperiences(prevExperiences => 
         prevExperiences.map(exp => 
@@ -133,40 +147,13 @@ function App() {
       )
     }
   }
-
-
-  
-  function handleFirstNameChange(e) {
-    setFirstName(e.target.value);
-  }
-  function handleLastNameChange(e) {
-    setLastName(e.target.value);
-  }
-  function handleCityChange(e) {
-    setCityAddress(e.target.value);
-  }
-  function handlePhoneChange(e) {
-    setPhoneNum(e.target.value);
-  }
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
   
 
   return (
     <>
       <div className='flex w-full h-full'>
         <Editor
-        firstName={firstName}
-        lastName={lastName} 
-        handleFirstNameChange={handleFirstNameChange}
-        handleLastNameChange={handleLastNameChange}
-        cityAddress={cityAddress}
-        phoneNum={phoneNum}
-        email={email}
-        handleCityChange={handleCityChange}
-        handlePhoneChange={handlePhoneChange}
-        handleEmailChange={handleEmailChange}
+        personalInfo={personalInfo}
         education={education}
         experiences={experiences}
         updateArray={updateArray}
@@ -176,11 +163,7 @@ function App() {
         deleteForm={deleteForm}
         />
         <Preview 
-        firstName={firstName}
-        lastName={lastName}
-        cityAddress={cityAddress}
-        phoneNum={phoneNum}
-        email={email}
+        personalInfo={personalInfo}
         education={education}
         experiences={experiences}
         />

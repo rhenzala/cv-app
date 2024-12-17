@@ -1,82 +1,67 @@
+/* eslint-disable react/prop-types */
 
 function CreateForm({
-    firstName, 
-    lastName, 
-    handleFirstNameChange,
-    handleLastNameChange,
-    cityAddress,
-    phoneNum,
-    email,
-    handleCityChange,
-    handlePhoneChange,
-    handleEmailChange
+    info,
+    updateInfo
 }) {
     return (
-        <form action="" className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 py-4 w-[85%]">
             <div className="flex flex-col gap-1">
-                <label htmlFor="firstName">First Name</label>
+                <label htmlFor={`firstName-${info.id}`}>First Name</label>
                 <input 
                 type="text"
-                id="firstName"
-                value={firstName}
-                onChange={handleFirstNameChange}
+                id={`firstName-${info.id}`}
+                value={info.firstName}
+                onChange={e => updateInfo('Personal', info.id, 'firstName', e.target.value)}
                 className="rounded-md p-1"
                     />
             </div>
             <div className="flex flex-col gap-1">
-                <label htmlFor="lastName">Last Name</label>
+                <label htmlFor={`lastName-${info.id}`}>Last Name</label>
                 <input 
                 type="text"
-                id="lastName"
-                value={lastName}
-                onChange={handleLastNameChange}
+                id={`lastName-${info.id}`}
+                value={info.lastName}
+                onChange={e => updateInfo('Personal', info.id, 'lastName', e.target.value)}
                 className="rounded-md p-1"
                     />
             </div>
             <div className="flex flex-col gap-1">
-                <label htmlFor="cityAddress">City Address</label>
+                <label htmlFor={`cityAddress-${info.id}`}>City Address</label>
                 <input 
                 type="text"
-                id="cityAddress"
-                value={cityAddress}
-                onChange={handleCityChange}
+                id={`cityAddress-${info.id}`}
+                value={info.cityAddress}
+                onChange={e => updateInfo('Personal', info.id, 'cityAddress', e.target.value)}
                 className="rounded-md p-1"
                     />
             </div>
             <div className="flex flex-col gap-1">
-                <label htmlFor="phoneNumber">Phone</label>
+                <label htmlFor={`phoneNum-${info.id}`}>Phone</label>
                 <input 
                 type="tel"
-                id="phoneNumber"
-                value={phoneNum}
-                onChange={handlePhoneChange}
+                id={`phoneNum-${info.id}`}
+                value={info.phoneNum}
+                onChange={e => updateInfo('Personal', info.id, 'phoneNum', e.target.value)}
                 className="rounded-md p-1"
                     />
             </div>
             <div className="flex flex-col gap-1">
-                <label htmlFor="emailAddress">Email</label>
+                <label htmlFor={`emailAddress-${info.id}`}>Email</label>
                 <input 
                 type="email"
-                id="emailAddress"
-                value={email}
-                onChange={handleEmailChange}
+                id={`emailAddress-${info.id}`}
+                value={info.email}
+                onChange={e => updateInfo('Personal', info.id, 'email', e.target.value)}
                 className="rounded-md p-1"
                     />
             </div>
-        </form>
+        </div>
     )
 }
 export default function PersonalDetails({
-    firstName, 
-    lastName, 
-    handleFirstNameChange,
-    handleLastNameChange,
-    cityAddress,
-    phoneNum,
-    email,
-    handleCityChange,
-    handlePhoneChange,
-    handleEmailChange
+    personalInfo,
+    updateInfo
 }) { 
     return (
         <section className="bg-light-gray p-8 rounded-lg">
@@ -84,18 +69,17 @@ export default function PersonalDetails({
                 <h1 className="font-semibold text-xl">Personal Details</h1>
                 <button>Show</button>
             </div>
-            <CreateForm
-             firstName={firstName} 
-             lastName={lastName}
-             handleFirstNameChange={handleFirstNameChange}
-             handleLastNameChange={handleLastNameChange}
-             cityAddress={cityAddress}
-             phoneNum={phoneNum}
-             email={email}
-             handleCityChange={handleCityChange}
-             handlePhoneChange={handlePhoneChange}
-             handleEmailChange={handleEmailChange}
-            />
+            <form 
+            onSubmit={e => e.preventDefault()}
+            className="flex flex-col gap-4">
+                {personalInfo.map((info) => (
+                    <CreateForm
+                        key={info.id}
+                        info={info}
+                        updateInfo={updateInfo}
+                    />
+                ))}
+            </form>
         </section>
          
     )
