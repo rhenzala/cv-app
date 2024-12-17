@@ -1,4 +1,23 @@
+/* eslint-disable react/prop-types */
+import { format, isValid, parseISO } from "date-fns";
 
+const formatDate = (date) => {
+    if (!date) return '';
+    
+    let dateToFormat;
+ 
+    if (typeof date === 'string') {
+        dateToFormat = parseISO(date);
+    } else {
+        dateToFormat = new Date(date);
+    }
+
+    if (!isValid(dateToFormat)) {
+        console.warn('Invalid date provided:', date);
+        return '';
+    }
+    return format(dateToFormat, 'MMM yyyy')
+}
 function PersonalSection({
     firstName, 
     lastName,
@@ -18,22 +37,93 @@ function PersonalSection({
         </section>
     )
 }
+function DisplayEducation({educ}) {
+    return (
+        <div>
+            <div className="flex justify-between">
+            <h2 className="font-semibold">{educ.school}</h2>
+            <p className="flex gap-2 italic text-[12px]">
+                <span>{formatDate(educ.fromDate)}</span>-
+                <span>{formatDate(educ.toDate)}</span>
+            </p>
+        </div>
+        <h2>{educ.fieldStudy}</h2>
+        <div>
+            <ul
+            className="list-disc pl-5"
+            >
+                {educ.descriptions.map((item, index) => (
+                    <li
+                    key={index}
+                    >
+                    <span>{item}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+        </div>
+    )
+}
 function EducationSection({
-    schoolName, 
-    fieldStudy, 
-    fromDate,
-    toDate
+    education
 }) {
     return (
         <section className="flex flex-col mt-4">
-            <h1 className="text-xl font-bold">Education</h1>
+            <h1 className="text-md font-semibold">EDUCATION</h1>
             <hr className="my-2" />
-            <h2 className="text-lg font-semibold">{schoolName}</h2>
-            <h2>{fieldStudy}</h2>
-            <p className="flex gap-2">
-                <span>{fromDate}</span>-
-                <span>{toDate}</span>
-            </p>
+            <div>
+                {education.map(educ => 
+                    <DisplayEducation
+                    key={educ.id} 
+                    educ={educ}
+                    />
+                )}
+            </div>
+        </section>
+    )
+}
+function DisplayExperience({experience}) {
+    return (
+        <div>
+            <div className="flex justify-between">
+                <h2 className="font-semibold">{experience.company}</h2>
+                <p className="flex gap-2 italic text-[12px]">
+                    <span>{formatDate(experience.fromWorkDate)}</span>-
+                    <span>{formatDate(experience.toWorkDate)}</span>
+                </p>
+            </div>
+            <h2>{experience.role}</h2>
+            <div>
+                <ul
+                className="list-disc pl-5"
+                >
+                    {experience.descriptions.map((item, index) => (
+                        <li
+                        key={index}
+                        >
+                        <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    )
+}
+function ExperienceSection({
+    experiences
+}) {
+    return (
+        <section className="flex flex-col mt-4">
+            <h1 className="text-md font-semibold">EXPERIENCE</h1>
+            <hr className="my-2" />
+            <div>
+            {experiences.map(experience => (
+                <DisplayExperience
+                key={experience.id}
+                experience={experience} 
+                />
+            ))}
+            </div>
         </section>
     )
 }
@@ -43,14 +133,12 @@ export default function Preview({
     cityAddress,
     phoneNum,
     email,
-    schoolName, 
-    fieldStudy, 
-    fromDate,
-    toDate
+    education,
+    experiences
 }) {
     return (
         <div className="preview text-black w-[60%] p-8">
-            <section className="bg-white h-full p-10 mx-auto max-w-[600px] aspect-[1/1.414]">
+            <section className="bg-white text-sm p-10 mx-auto max-w-[600px] aspect-[1/1.414]">
                 <PersonalSection
                 firstName={firstName}
                 lastName={lastName}
@@ -59,10 +147,10 @@ export default function Preview({
                 email={email}
                 />
                 <EducationSection
-                schoolName={schoolName}
-                fieldStudy={fieldStudy}
-                fromDate={fromDate}
-                toDate={toDate} 
+                education={education}
+                />
+                <ExperienceSection
+                experiences={experiences}
                 />
             </section>
         </div>
