@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import PersonalDetails from "./PersonalDetails"
 import Education from "./Education"
+import Experience from "./Experience"
 
 
 export default function Editor ({
@@ -13,14 +15,13 @@ export default function Editor ({
         handleCityChange,
         handlePhoneChange,
         handleEmailChange,
-        schoolName, 
-        handleSchoolNameChange,
-        fieldStudy, 
-        handleFieldStudyChange,
-        fromDate,
-        handleFromChange,
-        toDate,
-        handleToChange
+        education,
+        experiences,
+        updateArray,
+        addDescription,
+        deleteDescription,
+        addForm,
+        deleteForm
     }) {
     return (
         <div className="editor p-8 text-black w-[40%] flex flex-col gap-3">
@@ -37,14 +38,20 @@ export default function Editor ({
             handleEmailChange={handleEmailChange}
             />
             <Education
-            schoolName={schoolName}
-            handleSchoolNameChange={handleSchoolNameChange}
-            fieldStudy={fieldStudy}
-            handleFieldStudyChange={handleFieldStudyChange}
-            fromDate={fromDate}
-            handleFromChange={handleFromChange}
-            toDate={toDate}
-            handleToChange={handleToChange} 
+            education={education}
+            updateEducation={updateArray}
+            addDescription={addDescription}
+            deleteDescription={deleteDescription}
+            addEducation={addForm}
+            deleteEducation={deleteForm}
+            />
+            <Experience 
+            experiences={experiences}
+            updateExperience={updateArray}
+            addDescription={addDescription}
+            deleteDescription={deleteDescription}
+            addExperience={addForm}
+            deleteExperience={deleteForm}
             />
         </div>
     )
