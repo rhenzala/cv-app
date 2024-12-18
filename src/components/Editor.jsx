@@ -23,15 +23,16 @@ export default function Editor ({
         window.print();
     }
     return (
-        <div className="editor p-8 text-black bg-black w-[40%] flex flex-col gap-4 overflow-y-auto">
-            <header className="w-full text-white flex justify-between items-center">
+        <div className="editor p-8 text-black bg-black w-[40%] flex flex-col gap-4 overflow-y-auto custom-md:w-full">
+            <header className="w-full mb-4 text-white flex justify-between items-center flex-1 custom-md:flex-col custom-md:gap-4">
                 <div className="logo">
-                    <h1 className="font-bold text-5xl">CV Generator</h1>
+                    <h1 className="font-bold text-5xl custom-sm:text-[36px]">CV Generator</h1> 
                 </div>
-                <div className="download-document mr-4">
+                <div className="download-document">
                     <button 
                     onClick={handlePrintBtn} 
                     className="rounded-md bg-rose py-2 px-4 hover:scale-105 transition ease-in delay-150"
+                    aria-label="Print Button"
                     >
                         <img
                         src={printIcon}

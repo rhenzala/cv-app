@@ -168,7 +168,7 @@ export default function Preview({
     skills
 }) {
     return (
-        <div className="preview text-black w-[60%] p-8">
+        <div className="preview text-black w-[60%] p-8 custom-sm:w-full">
             <section className="print bg-white text-sm p-10 mx-auto max-w-[600px] aspect-[1/1.414]">
                 <PersonalSection personalInfo={personalInfo} />
                 <EducationSection education={education} />

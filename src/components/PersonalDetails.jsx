@@ -84,6 +84,7 @@ export default function PersonalDetails({
             : <button 
             className="dark-shadow bg-rose rounded-md text-white py-1 px-4"
             onClick={onShow}
+            aria-label="Show"
             >
             Show
             </button>

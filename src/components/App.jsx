@@ -197,7 +197,7 @@ function App() {
 
   return (
     <>
-      <div className='flex w-full h-full'>
+      <div className='flex w-full h-full custom-sm:flex-col'>
         <Editor
         personalInfo={personalInfo}
         education={education}
