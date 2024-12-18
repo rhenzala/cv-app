@@ -17,7 +17,10 @@ export default {
       'rose': '#f43f5e',
     },
     extend: {
-    
+      screens: {
+        'custom-sm': { max: '680px' }, 
+        'custom-md': { max: '1100px' }
+      },
     },
   },
   plugins: [],
