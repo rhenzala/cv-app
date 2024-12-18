@@ -134,14 +134,12 @@ function ExperienceSection({
 function DisplaySkills({skill}) {
     return (
         <div>
-            <h2 className="font-semibold">{skill.skillName}</h2>
-            <div>
+            <h2 className="font-semibold inline">{skill.skillName}: </h2>
                 {skill.skillSet.map((item, index) => (
                     <span key={index}>
                         {item}{index !== skill.skillSet.length - 1 && ', '}
                     </span>
                 ))}
-            </div>
         </div>
     )
 }
