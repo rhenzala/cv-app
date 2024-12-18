@@ -19,6 +19,9 @@ export default function Editor ({
         deleteForm
     }) {
     const [activeIndex, setActiveIndex] = useState(0);
+    function handlePrintBtn() {
+        window.print();
+    }
     return (
         <div className="editor p-8 text-black bg-black w-[40%] flex flex-col gap-4 overflow-y-auto">
             <header className="w-full text-white flex justify-between items-center">
@@ -26,7 +29,10 @@ export default function Editor ({
                     <h1 className="font-bold text-5xl">CV Generator</h1>
                 </div>
                 <div className="download-document mr-4">
-                    <button className="rounded-md bg-rose py-2 px-4 hover:scale-105 transition ease-in delay-150">
+                    <button 
+                    onClick={handlePrintBtn} 
+                    className="rounded-md bg-rose py-2 px-4 hover:scale-105 transition ease-in delay-150"
+                    >
                         <img
                         src={printIcon}
                         className="w-8 h-8" 

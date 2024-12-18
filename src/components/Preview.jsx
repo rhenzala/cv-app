@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { format, isValid, parseISO } from "date-fns";
 
+
 const formatDate = (date) => {
     if (!date) return '';
     
@@ -47,9 +48,9 @@ function DisplayEducation({educ}) {
         <div>
             <div className="flex justify-between">
             <h2 className="font-semibold">{educ.school}</h2>
-            <p className="flex gap-2 italic text-[12px]">
-                <span>{formatDate(educ.fromDate)}</span>– 
-                <span>{formatDate(educ.toDate)}</span>
+            <p className="italic text-[12px]">
+                <span>{formatDate(educ.fromDate)}</span> 
+                <span>{' – ' + formatDate(educ.toDate)}</span>
             </p>
         </div>
         <h2>{educ.fieldStudy}</h2>
@@ -69,14 +70,12 @@ function DisplayEducation({educ}) {
         </div>
     )
 }
-function EducationSection({
-    education
-}) {
+function EducationSection({ education }) {
     return (
         <section className="flex flex-col mt-4">
             <h1 className="text-md font-semibold">EDUCATION</h1>
             <hr className="my-2" />
-            <div>
+            <div className="flex flex-col gap-2">
                 {education.map(educ => 
                     <DisplayEducation
                     key={educ.id} 
@@ -92,9 +91,9 @@ function DisplayExperience({experience}) {
         <div>
             <div className="flex justify-between">
                 <h2 className="font-semibold">{experience.company}</h2>
-                <p className="flex gap-2 italic text-[12px]">
-                    <span>{formatDate(experience.fromWorkDate)}</span>– 
-                    <span>{formatDate(experience.toWorkDate)}</span>
+                <p className="italic text-[12px]">
+                    <span>{formatDate(experience.fromWorkDate)}</span> 
+                    <span>{' – ' + formatDate(experience.toWorkDate)}</span>
                 </p>
             </div>
             <h2>{experience.role}</h2>
@@ -121,7 +120,7 @@ function ExperienceSection({
         <section className="flex flex-col mt-4">
             <h1 className="text-md font-semibold">EXPERIENCE</h1>
             <hr className="my-2" />
-            <div>
+            <div className="flex flex-col gap-2">
             {experiences.map(experience => (
                 <DisplayExperience
                 key={experience.id}
@@ -151,7 +150,7 @@ function SkillsSection({ skills }) {
         <section className="flex flex-col mt-4">
             <h1 className="text-md font-semibold">SKILLS</h1>
             <hr className="my-2" />
-            <div>
+            <div className="flex flex-col gap-2">
             {skills.map(skill => (
                 <DisplaySkills
                 key={skill.id}
@@ -170,7 +169,7 @@ export default function Preview({
 }) {
     return (
         <div className="preview text-black w-[60%] p-8">
-            <section className="bg-white text-sm p-10 mx-auto max-w-[600px] aspect-[1/1.414]">
+            <section className="print bg-white text-sm p-10 mx-auto max-w-[600px] aspect-[1/1.414]">
                 <PersonalSection personalInfo={personalInfo} />
                 <EducationSection education={education} />
                 <ExperienceSection experiences={experiences} />
